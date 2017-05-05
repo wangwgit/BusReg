@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<title>业务登记信息列表</title>
+
+<!-- Bootstrap -->
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="css/black_defout.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+		<div class="well">
+			<div class="row">
+				<form class="form-inline" role="form">
+					<div class="form-group">
+						<label for="name">用户姓名</label> <input type="text"
+							class="form-control" id="name" placeholder="请输入用户姓名">&nbsp;&nbsp;
+					</div>
+					<div class="form-group">
+						<label for="name">身份证号码</label> <input type="text"
+							class="form-control" id="name" placeholder="请输入用户身份证号码">&nbsp;&nbsp;
+					</div>
+					<div class="form-group">
+						<label class="checkbox-inline"> <input type="radio"
+							name="optionsRadiosinline" id="optionsRadios3" value="option1"
+							checked onclick="onUim()"> 单卡
+						</label> <label class="checkbox-inline"> <input type="radio"
+							name="optionsRadiosinline" id="optionsRadios4" value="option2"
+							onclick="onBroadband()"> 宽带
+						</label>
+					</div>
+					<button type="submit" class="btn btn-default">查询</button>
+				</form>
+			</div>
+			<div class="row" style="margin-top: 20px;">
+				<table class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th>姓名</th>
+							<th>身份证</th>
+							<th>业务类型</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>单卡</td>
+							<td><a href="uimDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>单卡</td>
+							<td><a href="uimDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td>张三</td>
+							<td>410000000000000</td>
+							<td>宽带</td>
+							<td><a href="broadbandDetails.html">查看详情</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row" >
+				<ul class="pagination pull-right">
+					<li><a href="#">&laquo;</a></li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">&raquo;</a></li>
+				</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="jquery/jquery.min.js"></script>
+
+
+</body>
+</html>
