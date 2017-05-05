@@ -6,7 +6,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+  
 <body>
 	<ul class="pagination pull-right" id="pageContent">
 		<li><a href="#">&laquo;</a></li>
@@ -17,6 +17,7 @@
 	<script type="text/javascript">
 	var totalCount=${pageResout.totalCount};
 	var totalPage=${pageResout.totalPage};
+	var currentPage=${pageResout.currentPage};
 	function refreshPage(startPage)
 	{
 		var pageContent= $("#pageContent");
@@ -29,7 +30,17 @@
 			{
 				break;
 			}
-			pageContent.append("<li><a>"+tempPage+"</a></li>");
+			var pageLi;
+			if(tempPage==currentPage)
+			{
+				pageLi="<li><a class="active">"+tempPage+"</a></li>";
+			}
+			else
+			{
+				pageLi="<li><a>"+tempPage+"</a></li>";
+			}
+			
+			pageContent.append(pageLi);
 		}
 		pageContent.append("<li><a>&raquo;</a></li>");
 	}
