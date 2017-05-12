@@ -34,7 +34,7 @@
 		<div class="page-header">
 			<div class="well">
 				<jsp:include page="../menu/businessHallMenu.jsp"></jsp:include>
-				<jsp:include page="list3.jsp"></jsp:include>
+				<jsp:include page="searchBar3.jsp"></jsp:include>
 				<div class="row" style="margin-top: 20px;">
 					<table class="table table-bordered table-hover table-striped">
 						<thead>
@@ -44,6 +44,8 @@
 								<th>身份证</th>
 								<th>uim号码</th>
 								<th>添加时间</th>
+								<th>所属分局</th>
+								<th>所属分点</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -57,6 +59,8 @@
 									<td>${data.uimNum}</td>
 									<td><fmt:formatDate value="${data.insertTime}"
 											pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<td>${data.sName}</td>
+									<td>${data.bName}</td>
 									<td><a href="uim/details.do?id=${data.id}">查看详情</a></td>
 								</tr>
 							</c:forEach>

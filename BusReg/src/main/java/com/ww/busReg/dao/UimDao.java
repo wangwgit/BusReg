@@ -14,9 +14,11 @@ public interface UimDao {
 
 	int getFindCount(@Param("userName")String userName, @Param("cardNum")String cardNum);
 
-	List<Uim> findForPage(@Param("userName")String userName,@Param("cardNum") String cardNum, @Param("startIndex")Integer startIndex ,@Param("pageSize")Integer pageSize);
+	List<Map<String, Object>> findForPageForShow(@Param("userName")String userName,@Param("cardNum") String cardNum, @Param("startIndex")Integer startIndex ,@Param("pageSize")Integer pageSize);
 
-	Map<String, Object> getDetailsById(@Param("id")int id);
+	Map<String, Object> getDetailsByIdForShow(@Param("id")int id);
+
+	Uim getById(@Param("id")int id);
 
 
 

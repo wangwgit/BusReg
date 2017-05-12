@@ -24,7 +24,7 @@ public class UimServiceImpl implements UimService{
 	}
 
 	@Override
-	public void findForPage(String userName, String cardNum,
+	public void findForPageForShow(String userName, String cardNum,
 			PageResout pageResout) {
 		if(!StringUtils.isEmpty(userName))
 		{
@@ -36,13 +36,18 @@ public class UimServiceImpl implements UimService{
 		}
 		int totalCount= uimDao.getFindCount(userName,cardNum);
 		pageResout.setTotalCount(totalCount);
-		List<Uim> resout= uimDao.findForPage(userName,cardNum,pageResout.getStartIndex(),pageResout.getPageSize());
+		List<Map<String, Object>> resout= uimDao.findForPageForShow(userName,cardNum,pageResout.getStartIndex(),pageResout.getPageSize());
 		pageResout.setDatas(resout);
 
 	}
 
 	@Override
-	public Map<String, Object> getDetailsById(int id) {
-		return uimDao.getDetailsById(id);
+	public Map<String, Object> getDetailsByIdForShow(int id) {
+		return uimDao.getDetailsByIdForShow(id);
+	}
+
+	@Override
+	public Uim getById(int id) {
+		return uimDao.getById(id);
 	}
 }

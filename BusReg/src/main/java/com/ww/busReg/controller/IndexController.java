@@ -37,7 +37,7 @@ public class IndexController {
 	}
 	@RequestMapping("/toList3")
 	public String toList3() {
-		return "workBill/list3";
+		return "redirect:uim/list.do";
 	}
 	@RequestMapping("/toInput")
 	public String totoInput() {

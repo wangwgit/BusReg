@@ -64,21 +64,20 @@
 					</tr>
 					<tr>
 						<td>身份证正面</td>
-						<td><a href="javascript:void(0);">下载</a></td>
+						<td><a href="uim/downFile.do?id=${uim.id}&type=cardPhotoFront" >下载</a></td>
 					</tr>
 					<tr>
 						<td>身份证反面</td>
-						<td><a href="javascript:void(0);">下载</a></td>
+						<td><a href="uim/downFile.do?id=${uim.id}&type=cardPhotoBack" >下载</a></td>
 					</tr>
 					<tr>
 						<td>手持身份证视频</td>
-						<td><a href="javascript:void(0);">下载</a></td>
+						<td><a href="uim/downFile.do?id=${uim.id}&type=userCardVoideo" >下载</a></td>
 					</tr>
 					<tr>
 						<td>手持身份证照片</td>
-						<td><a href="javascript:void(0);">下载</a></td>
+						<td><a href="uim/downFile.do?id=${uim.id}&type=userCardPhoto" >下载</a></td>
 					</tr>
-
 				</table>
 			</div>
 			<div class="row text-center"><button type="button" class="btn btn-default" onclick=" back()">返回</button></div>

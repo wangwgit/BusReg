@@ -107,7 +107,8 @@
 					</form>
 				</div>
 				<div class="row" id="broadband" hidden="hidden">
-					<form class="form-horizontal" role="form" id="broadbandForm">
+					<form class="form-horizontal" role="form" id="broadbandForm" 
+						action="broadband/add.do" enctype="multipart/form-data" method="post">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">用户姓名</label>
 							<div class="col-sm-10">
@@ -135,7 +136,6 @@
 							</div>
 						</div>
 						<div class="form-group">
-
 							<div class="col-sm-offset-2 col-sm-10">
 								<button type="submit" class="btn btn-default" onclick="">提交</button>
 								&nbsp;&nbsp;
@@ -240,6 +240,57 @@
 						}
 					}				
 					
+				}
+			});
+			$('#uimForm').bootstrapValidator({
+				message : 'This value is not valid',
+				feedbackIcons : {
+					valid : 'glyphicon glyphicon-ok',
+					invalid : 'glyphicon glyphicon-remove',
+					validating : 'glyphicon glyphicon-refresh'
+				},
+				fields : {
+					userName : {
+						message : '用户姓名不合法',
+						validators : {
+							notEmpty : {
+								message : '用户姓名不能为空'
+							},
+							stringLength: {
+		                        min: 2,
+		                        max: 6,
+		                        message: '用户名姓名长度必须是2-6'
+		                    }
+						}
+					},
+					cardNum : {
+						message : '身份证号码不合法',
+						validators : {
+							notEmpty : {
+								message : '身份证号码不能为空'
+							},
+							 regexp: {
+			                        regexp: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
+			                        message: '身份证不合法'
+			                }						
+						}
+					},					
+					cardPhotoFrontF : {
+						message : '必须上传身份证正面照片',
+						validators : {
+							notEmpty : {
+								message : '必须上传身份证正面照片'
+							}						
+						}
+					},
+					cardPhotoBackF : {
+						message : '必须上传身份证反面照片',
+						validators : {
+							notEmpty : {
+								message : '必须上传身份证反面照片'
+							}						
+						}
+					}					
 				}
 			});
 		});

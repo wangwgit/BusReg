@@ -9,9 +9,11 @@ public interface UimService {
 
 	void add(Uim uim);
 
-	void findForPage(String userName, String cardNum,
+	void findForPageForShow(String userName, String cardNum,
 			PageResout pageResout);
 
-	Map<String, Object> getDetailsById(int id);
+	Map<String, Object> getDetailsByIdForShow(int id);
+
+	Uim getById(int id);
 
 }

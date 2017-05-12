@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -62,15 +63,46 @@ public class UimController {
 	{
 		PageResout pageResout=new PageResout();
 		pageResout.setCurrentPage(currentPage);
-		uimService.findForPage(userName,cardNum,pageResout);
+		uimService.findForPageForShow(userName,cardNum,pageResout);
 		request.setAttribute("pageResout", pageResout);
+		request.setAttribute("userName", userName);
+		request.setAttribute("cardNum", cardNum);
 		return "workBill/uimlist";
 	}
 	@RequestMapping("/details")
 	public String details(int id,HttpServletRequest request)
 	{
-		Map<String, Object> uim=  uimService.getDetailsById(id);
+		Map<String, Object> uim=  uimService.getDetailsByIdForShow(id);
 		request.setAttribute("uim", uim);
 		return "workBill/uimDetails";
+	}
+	@RequestMapping("/downFile")
+	public void downFile(int id,String type,HttpServletResponse response)
+	{
+		Uim uim= uimService.getById(id);
+		if(uim!=null)
+		{
+			String fileName;
+			String downName;
+			switch (type) {
+			case "cardPhotoFront":
+				fileName=uim.getCardPhotoFront();
+				break;
+			case "cardPhotoBack":
+				fileName=uim.getCardPhotoBack();
+				break;
+			case "userCardVoideo":
+				fileName=uim.getUserCardVoideo();
+				break;
+			case "userCardPhoto":
+				fileName=uim.getUserCardPhoto();
+				break;
+			default:
+				fileName="";
+				break;
+			}
+			downName=fileName.substring(fileName.indexOf("_")+1);
+			SysUtil.downFile(filePath+fileName,downName, response);
+		}
 	}
 }

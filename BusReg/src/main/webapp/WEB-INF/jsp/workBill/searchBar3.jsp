@@ -23,16 +23,8 @@
 			onclick="onSubmitSearch(1)">查询</button>
 	</form>
 </div>
-<div id="listDetails"></div>
-
-
-
-
 
 <script type="text/javascript">
-	$(function(){
-		onSubmitSearch(1);
-	});
 	function onSubmitSearch(currentPage)
 	{
 		var type=$("input[name='type']:checked").val();
@@ -42,8 +34,9 @@
 			$.get("uim/listDetails.do?"+params, function(data) {
 				$("#listDetails").html(data);	
 			});
+			window.location.href="uim/list.do?"+params;
 		}
-		
 		return false;
 	}
+
 	</script>
