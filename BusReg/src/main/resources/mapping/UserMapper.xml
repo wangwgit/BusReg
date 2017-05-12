@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ww.busReg.dao.UserDao">
+	<resultMap id="UserResultMap" type="com.ww.busReg.domain.User">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="limitsId" property="limitsId" jdbcType="INTEGER" />
+		<result column="limitsId" property="limitsId" jdbcType="INTEGER" />
+		<result column="subofficeId" property="subofficeId" jdbcType="INTEGER" />
+		<result column="businessHallId" property="businessHallId" jdbcType="INTEGER" />
+		<result column="usable" property="usable" javaType="boolean" jdbcType="INTEGER" />
+
+	</resultMap>
+
+	<select id="getAll" resultMap="UserResultMap">
+		select * from user 
+	</select>
+
 	<select id="getCountByNameAndPassWord" resultType="java.lang.Integer">
 		select count(1) from user where userName=#{userName} and password=#{password}
 	</select>

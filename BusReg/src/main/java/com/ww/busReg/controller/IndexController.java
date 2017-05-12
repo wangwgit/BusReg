@@ -21,15 +21,27 @@ public class IndexController {
 	UserService userService;
 	@RequestMapping("/index")
 	public String toIndex() {
-		return "input";
+		return "login";
 	}
 	@RequestMapping("/toLogin")
 	public String toLogin() {
 		return "login";
 	}
-	@RequestMapping("/toList")
-	public String toList() {
-		return "list";
+	@RequestMapping("/toList1")
+	public String toList1() {
+		return "workBill/list1";
+	}
+	@RequestMapping("/toList2")
+	public String toList2() {
+		return "workBill/list3";
+	}
+	@RequestMapping("/toList3")
+	public String toList3() {
+		return "workBill/list3";
+	}
+	@RequestMapping("/toInput")
+	public String totoInput() {
+		return "workBill/input";
 	}
 	@ResponseBody 
 	@RequestMapping("/login")

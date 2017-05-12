@@ -10,4 +10,6 @@ public interface UimService {
 	void findForPage(String userName, String cardNum,
 			PageResout pageResout);
 
+	Uim getById(int id);
+
 }

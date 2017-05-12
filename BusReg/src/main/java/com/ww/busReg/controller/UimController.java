@@ -27,9 +27,13 @@ public class UimController {
 	@Resource
 	UimService uimService;
 	@RequestMapping("/add")
-	public String addUim(Uim uim,@RequestParam MultipartFile cardPhotoFrontF,@RequestParam MultipartFile cardPhotoBackF,@RequestParam MultipartFile userCardVoideoF,@RequestParam MultipartFile userCardPhotoF) throws IllegalStateException, IOException
+	public String addUim(Uim uim,@RequestParam MultipartFile cardPhotoFrontF,@RequestParam MultipartFile cardPhotoBackF,@RequestParam MultipartFile userCardVoideoF,@RequestParam MultipartFile userCardPhotoF,HttpServletRequest request) throws IllegalStateException, IOException
 	{	
 		String filePre= SysUtil.getFilePre(uim.getCardNum());
+		
+		uim.setSubofficeId(0);
+		uim.setBusinessHallId(0);
+		uim.setDealState(0);
 		
 		String fileName=filePre+cardPhotoFrontF.getName()+SysUtil.getSuffix(cardPhotoFrontF.getOriginalFilename());
 		cardPhotoFrontF.transferTo(new File(filePath+fileName));
@@ -48,7 +52,9 @@ public class UimController {
 		uim.setUserCardPhoto(fileName);
 		
 		uimService.add(uim);
-		return "inputSuccess";
+		//指定点击确定要跳转的页面
+		request.setAttribute("backUrl", "toInput.do");
+		return "util/optSuccess";
 	}
 	@RequestMapping("/listDetails")
 	public String listDetails(String userName,String cardNum, Integer currentPage,HttpServletRequest request)
@@ -57,6 +63,12 @@ public class UimController {
 		pageResout.setCurrentPage(currentPage);
 		uimService.findForPage(userName,cardNum,pageResout);
 		request.setAttribute("pageResout", pageResout);
-		return "listUimDetails";
+		return "workBill/listUimDetails";
+	}
+	@RequestMapping("/details")
+	public String details(int id,HttpServletRequest request)
+	{
+		Uim uim=  uimService.getById(id);
+		return "workBill/uimDetails";
 	}
 }

@@ -8,8 +8,8 @@
 <title>业务登记信息列表</title>
 
 <!-- Bootstrap -->
-<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-<link href="css/black_defout.css" rel="stylesheet">
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/black_defout.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,6 +19,25 @@
     <![endif]-->
 </head>
 <body>
+	 <div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+			</div>
+				<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>
+					<a  href="list2.html">工单列表</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+			 		<li>
+					<a  href="../sys/chagePassword.html">修改密码</a>
+					</li>
+				</ul>
+				</div>
+			
+		</div>
+	</div>
 	<div class="container">
 		<div class="page-header">
 		<div class="well">
@@ -33,6 +52,17 @@
 							class="form-control" id="name" placeholder="请输入用户身份证号码">&nbsp;&nbsp;
 					</div>
 					<div class="form-group">
+						<label for="name">所属分点</label>
+						<select class="form-control">
+							<option>全部</option>
+							<option>XX路营业厅</option>
+							<option>XX路营业厅</option>
+							<option>XX路营业厅</option>
+							<option>XX路营业厅</option>
+							<option>XX路营业厅</option>
+						</select>
+					</div>
+					<div class="form-group">
 						<label class="checkbox-inline"> <input type="radio"
 							name="optionsRadiosinline" id="optionsRadios3" value="option1"
 							checked onclick="onUim()"> 单卡
@@ -41,6 +71,7 @@
 							onclick="onBroadband()"> 宽带
 						</label>
 					</div>
+
 					<button type="submit" class="btn btn-default">查询</button>
 				</form>
 			</div>
@@ -48,78 +79,112 @@
 				<table class="table table-bordered table-hover table-striped">
 					<thead>
 						<tr>
+							<th>序号</th>
 							<th>姓名</th>
 							<th>身份证</th>
 							<th>业务类型</th>
+							<th>所属分点</th>
+							<th>工单状态</th>
 							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
+							<td>1</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>单卡</td>
-							<td><a href="uimDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealUimDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>2</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>单卡</td>
-							<td><a href="uimDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>已处理</td>
+							<td><a href="dealUimDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>3</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>4</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>5</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>6</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>7</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>8</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>9</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 						<tr>
+							<td>10</td>
 							<td>张三</td>
 							<td>410000000000000</td>
 							<td>宽带</td>
-							<td><a href="broadbandDetails.html">查看详情</a></td>
+							<td>XX路营业厅</td>
+							<td>未处理</td>
+							<td><a href="dealBroadbandDetails.html">查看详情</a></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="row" >
 				<ul class="pagination pull-right">
+					<li class="active"><a>共11234条</a></li>
 					<li><a href="#">&laquo;</a></li>
 					<li class="active"><a href="#">1</a></li>
 					<li><a href="#">2</a></li>
@@ -127,7 +192,8 @@
 					<li><a href="#">4</a></li>
 					<li><a href="#">5</a></li>
 					<li><a href="#">&raquo;</a></li>
-				</ul>
+					<li class="active"><a>共1124页</a></li>
+				</ul>			
 			</div>
 		</div>
 		</div>
@@ -135,7 +201,7 @@
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="jquery/jquery.min.js"></script>
+	<script src="../jquery/jquery.min.js"></script>
 
 
 </body>

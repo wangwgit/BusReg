@@ -13,6 +13,9 @@ public class Uim {
 	private String cardPhotoBack;
 	private String userCardVoideo;
 	private String userCardPhoto;
+	private int subofficeId;
+	private int businessHallId;
+	private int dealState;
 	private Date insertTime;
 	public int getId() {
 		return id;
@@ -67,6 +70,24 @@ public class Uim {
 	}
 	public void setInsertTime(Date insertTime) {
 		this.insertTime = insertTime;
+	}
+	public int getSubofficeId() {
+		return subofficeId;
+	}
+	public void setSubofficeId(int subofficeId) {
+		this.subofficeId = subofficeId;
+	}
+	public int getBusinessHallId() {
+		return businessHallId;
+	}
+	public void setBusinessHallId(int businessHallId) {
+		this.businessHallId = businessHallId;
+	}
+	public int getDealState() {
+		return dealState;
+	}
+	public void setDealState(int dealState) {
+		this.dealState = dealState;
 	}
 	
 }

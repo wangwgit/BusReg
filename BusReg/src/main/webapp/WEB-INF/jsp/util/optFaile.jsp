@@ -34,7 +34,7 @@
 			<div class="well">
 				<div class="row">
 
-					<h2>添加成功</h2>
+					<h2>操作失败</h2>
 					<div class="row text-center">
 						<button type="button" class="btn btn-default" onclick=" back()">确定</button>
 					</div>
@@ -50,7 +50,14 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		function back() {
-			window.location.href = "index.do";
+			if("${backUrl}")
+			{
+				window.location.href = "${backUrl}";
+			}
+			else
+			{
+				window.history.back();	
+			}	
 		}
 	</script>
 </body>

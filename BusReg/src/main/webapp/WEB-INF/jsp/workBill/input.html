@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<title>输入</title>
+
+<!-- Bootstrap -->
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="../bootstrapValidate/css/bootstrapValidator.min.css" rel="stylesheet" />
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn t work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+	 <div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+			</div>
+				<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>
+					<a href="input.html">工单录入</a>
+					</li>
+					<li>
+					<a  href="list3.html">工单列表</a>
+					</li>
+				</ul>
+					
+				<ul class="nav navbar-nav navbar-right">
+			 		<li>
+					<a  href="../chagePassword.html">修改密码</a>
+					</li>
+				</ul>
+			 </div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="page-header">
+		<div class="well">
+			<div class="row">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="firstname" class="col-sm-2 control-label">请选择业务类型</label>
+						<div class="col-sm-10">
+							<label class="checkbox-inline"> <input type="radio"
+								name="optionsRadiosinline" id="optionsRadios3" value="option1"
+								checked onclick="onUim()"> 单卡
+							</label> <label class="checkbox-inline"> <input type="radio"
+								name="optionsRadiosinline" id="optionsRadios4" value="option2" onclick="onBroadband()">
+								宽带
+							</label>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row" id="uim">
+				<form class="form-horizontal" role="form" id="uimForm">
+					<div class="form-group">
+						<label  class="col-sm-2 control-label">用户姓名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"  name="usename"
+								placeholder="请输入用户姓名">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">身份证号码</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="lastname"
+								placeholder="请输入身份证号码">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">uim卡号</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="lastname"
+								placeholder="请输入uim卡号">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">身份证正面</label>
+						<div class="col-sm-10">
+							<input type="file" id="inputfile" style="color:#c8c8c8">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">身份证反面</label>
+						<div class="col-sm-10">
+							<input type="file" id="inputfile" style="color:#c8c8c8">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">手持身份证视频</label>
+						<div class="col-sm-10">
+							<input type="file" id="inputfile" style="color:#c8c8c8">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">手持身份证照片</label>
+						<div class="col-sm-10">
+							<input type="file" id="inputfile" style="color:#c8c8c8">
+						</div>
+					</div>
+					<div class="form-group">
+
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default" onclick="return onSub();">提交</button>
+							&nbsp;&nbsp;
+							<button type="reset" class="btn btn-default" id="uimRest">重置</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row" id="broadband" hidden="hidden">
+				<form class="form-horizontal" role="form" id="broadbandForm">
+					<div class="form-group">
+						<label for="firstname" class="col-sm-2 control-label">用户姓名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="firstname"
+								placeholder="请输入用户姓名">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">身份证号码</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="lastname"
+								placeholder="请输入身份证号码" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">身份证正面</label>
+						<div class="col-sm-10">
+							<input type="file" id="inputfile" style="color:#c8c8c8">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">身份证反面</label>
+						<div class="col-sm-10">
+							<input type="file" id="inputfile" style="color:#c8c8c8">
+						</div>
+					</div>
+					<div class="form-group">
+
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default" onclick="return onSub();">提交</button>
+							&nbsp;&nbsp;
+							<button type="reset" class="btn btn-default" id="broadbandRest">重置</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="../jquery/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../bootstrapValidate/js/bootstrapValidator.min.js"></script>
+	<script type="text/javascript">
+		function onUim()
+		{
+			$("#uim").show();
+			$("#broadband").hide();
+		}
+		function onBroadband()
+		{
+			$("#uim").hide();
+			$("#broadband").show();
+		}
+		function onSub()
+		{
+			//alert('保存成功能');
+			//$("#uimForm").reset();
+			//$("#broadbandForm").reset();
+			window.location.href="inputSuccess.html";
+			return false;
+			
+		}
+	
+	</script>
+</body>
+</html>

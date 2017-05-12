@@ -14,11 +14,14 @@
 			jdbcType="VARCHAR" />
 		<result column="userCardPhoto" property="userCardPhoto"
 			jdbcType="VARCHAR" />
+		<result column="subofficeId" property="subofficeId" jdbcType="INTEGER" />
+		<result column="businessHallId" property="businessHallId" jdbcType="INTEGER" />
+		<result column="dealState" property="dealState" jdbcType="INTEGER" />
 		<result column="insertTime" property="insertTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, userName, cardNum,
-		uimNum,cardPhotoFront,cardPhotoBack,userCardVoideo,userCardPhoto
+		uimNum,cardPhotoFront,cardPhotoBack,userCardVoideo,userCardPhoto,subofficeId,businessHallId,dealState
 	</sql>
 	<insert id="insert" parameterType="com.ww.busReg.domain.Uim">
 		insert into uim (
@@ -28,7 +31,9 @@
 		#{cardNum,jdbcType=VARCHAR},
 		#{uimNum,jdbcType=VARCHAR},
 		#{cardPhotoFront,jdbcType=VARCHAR}, #{cardPhotoBack,jdbcType=VARCHAR},
-		#{userCardVoideo,jdbcType=VARCHAR}, #{userCardPhoto,jdbcType=VARCHAR})
+		#{userCardVoideo,jdbcType=VARCHAR}, #{userCardPhoto,jdbcType=VARCHAR},
+		#{subofficeId,jdbcType=INTEGER},#{businessHallId,jdbcType=INTEGER},
+		#{dealState,jdbcType=INTEGER})
 	</insert>
 
 	<select id="getFindCount" resultType="java.lang.Integer">
@@ -45,10 +50,10 @@
 	<select id="findForPage" resultMap="UimResultMap" >
 		select <include refid="Base_Column_List" />,insertTime from uim 
 		<where>
-			<if test="userName != null">
+			<if test="userName != null and userName!=''">
 				userName like #{userName,jdbcType=VARCHAR}
 			</if>
-			<if test="cardNum != null">
+			<if test="cardNum != null and cardNum!=''">
 				and cardNum like #{cardNum,jdbcType=VARCHAR}
 			</if>
 		</where>

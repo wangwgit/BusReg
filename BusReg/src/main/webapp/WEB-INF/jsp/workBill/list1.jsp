@@ -66,11 +66,9 @@
 		if("uim"==type)
 		{
 			$.get("uim/listDetails.do", function(data) {
-				$("#listDetails").html(data);		
+				$("#listDetails").html(data);	
 			});
 		}
-		else
-		{}
 		
 		return false;
 	}

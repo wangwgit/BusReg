@@ -30,16 +30,7 @@
     <![endif]-->
 </head>
 <body style="padding-top:30px;">
-
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="toLogin.do">登录</a>
-			</div>
-		</div>
-	</div>
-	</nav>
+	<jsp:include page="../menu/businessHallMenu.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
 			<div class="well">
