@@ -42,7 +42,6 @@ public class UimServiceImpl implements UimService{
 
 	@Override
 	public Uim getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return uimDao.getById(id);
 	}
 }
