@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -56,19 +57,20 @@ public class UimController {
 		request.setAttribute("backUrl", "toInput.do");
 		return "util/optSuccess";
 	}
-	@RequestMapping("/listDetails")
+	@RequestMapping("/list")
 	public String listDetails(String userName,String cardNum, Integer currentPage,HttpServletRequest request)
 	{
 		PageResout pageResout=new PageResout();
 		pageResout.setCurrentPage(currentPage);
 		uimService.findForPage(userName,cardNum,pageResout);
 		request.setAttribute("pageResout", pageResout);
-		return "workBill/listUimDetails";
+		return "workBill/uimlist";
 	}
 	@RequestMapping("/details")
 	public String details(int id,HttpServletRequest request)
 	{
-		Uim uim=  uimService.getById(id);
+		Map<String, Object> uim=  uimService.getDetailsById(id);
+		request.setAttribute("uim", uim);
 		return "workBill/uimDetails";
 	}
 }

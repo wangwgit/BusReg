@@ -1,6 +1,7 @@
 package com.ww.busReg.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,7 +42,7 @@ public class UimServiceImpl implements UimService{
 	}
 
 	@Override
-	public Uim getById(int id) {
-		return uimDao.getById(id);
+	public Map<String, Object> getDetailsById(int id) {
+		return uimDao.getDetailsById(id);
 	}
 }

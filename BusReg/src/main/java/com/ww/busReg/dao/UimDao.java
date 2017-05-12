@@ -1,6 +1,7 @@
 package com.ww.busReg.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -15,7 +16,7 @@ public interface UimDao {
 
 	List<Uim> findForPage(@Param("userName")String userName,@Param("cardNum") String cardNum, @Param("startIndex")Integer startIndex ,@Param("pageSize")Integer pageSize);
 
-	Uim getById(int id);
+	Map<String, Object> getDetailsById(@Param("id")int id);
 
 
 

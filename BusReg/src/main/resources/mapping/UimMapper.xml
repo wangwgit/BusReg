@@ -39,10 +39,10 @@
 	<select id="getFindCount" resultType="java.lang.Integer">
 		select count(1) from uim 
 		<where>
-			<if test="userName != null">
+			<if test="userName != null and userName!=''">
 				userName like #{userName,jdbcType=VARCHAR}
 			</if>
-			<if test="cardNum != null">
+			<if test="cardNum != null and cardNum!=''">
 				and cardNum like #{cardNum,jdbcType=VARCHAR}
 			</if>
 		</where>
@@ -59,7 +59,14 @@
 		</where>
 		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 	</select>
-	
+	<select id="getDetailsById" resultType="java.util.Map">
+		SELECT u.*,s.`name` AS sName,b.`name` AS bName FROM
+		(select id,
+		userName,cardNum,uimNum,cardPhotoFront,cardPhotoBack,userCardVoideo,userCardPhoto,subofficeId,businessHallId,dealState,insertTime
+		from uim where id= #{id,jdbcType=INTEGER}) u,
+		businesshall b,suboffice s
+		WHERE u.subofficeId=s.id AND u.businessHallId=b.id
+	</select>	
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.ww.busReg.service;
 
+import java.util.Map;
+
 import com.ww.busReg.domain.Uim;
 import com.ww.busReg.vo.PageResout;
 
@@ -10,6 +12,6 @@ public interface UimService {
 	void findForPage(String userName, String cardNum,
 			PageResout pageResout);
 
-	Uim getById(int id);
+	Map<String, Object> getDetailsById(int id);
 
 }
