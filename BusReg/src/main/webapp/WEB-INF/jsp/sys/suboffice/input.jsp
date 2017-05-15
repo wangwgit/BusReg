@@ -30,6 +30,7 @@
     <![endif]-->
 </head>
 <body style="padding-top:30px;">
+	<jsp:include page="../../menu/primaryMenu.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
 			<div class="well">

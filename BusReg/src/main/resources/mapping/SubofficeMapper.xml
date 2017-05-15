@@ -40,6 +40,7 @@
 				and name like #{name,jdbcType=VARCHAR}
 			</if>
 		</where>
+		order by num
 		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 	</select>
 	
