@@ -29,7 +29,7 @@ public class IndexController {
 	}
 	@RequestMapping("/toList1")
 	public String toList1() {
-		return "workBill/list1";
+		return "redirect:uim/list.do";
 	}
 	@RequestMapping("/toList2")
 	public String toList2() {

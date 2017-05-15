@@ -40,9 +40,9 @@
 							<label class="col-sm-2 control-label">请选择业务类型</label>
 							<div class="col-sm-10">
 								<label class="checkbox-inline"> <input type="radio"									
-									checked onclick="onUim()"> 单卡
+									checked onclick="onUim()" name="type"> 单卡
 								</label> <label class="checkbox-inline"> <input type="radio"									
-									onclick="onBroadband()"> 宽带
+									onclick="onBroadband()" name="type"> 宽带
 								</label>
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="lastname" class="col-sm-2 control-label">手持身份证视频</label>
+							<label  class="col-sm-2 control-label">手持身份证视频</label>
 							<div class="col-sm-10">
 								<input type="file" style="color:#c8c8c8" name="userCardVoideoF">
 							</div>
@@ -155,6 +155,7 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="bootstrapValidate/js/bootstrapValidator.min.js"></script>
+	<script src="js/bootstrapValidator_exit.js"></script>
 	<script type="text/javascript">
 		function onUim() {
 			$("#uim").show();
@@ -166,6 +167,7 @@
 		}
 
 		$(function() {
+				
 			$('#uimForm').bootstrapValidator({
 				message : 'This value is not valid',
 				feedbackIcons : {
@@ -196,7 +198,7 @@
 							 regexp: {
 			                        regexp: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
 			                        message: '身份证不合法'
-			                }						
+			                }	
 						}
 					},
 					uimNum : {
@@ -212,7 +214,15 @@
 						validators : {
 							notEmpty : {
 								message : '必须上传身份证正面照片'
-							}						
+							},
+							regexp: {
+								regexp:/.*.(IMG|JPG|BMP)/i,
+								message: '文件类型不合法'
+							},
+							fileSieze:{
+								message : '文件不能大于2M',
+								size:2*1024
+							}	
 						}
 					},
 					cardPhotoBackF : {
@@ -220,6 +230,14 @@
 						validators : {
 							notEmpty : {
 								message : '必须上传身份证反面照片'
+							},
+							regexp: {
+								regexp:/.*.(IMG|JPG|BMP)/i,
+								message: '文件类型不合法'
+							},
+							fileSieze:{
+								message : '文件不能大于2M',
+								size:2*1024
 							}						
 						}
 					},
@@ -228,6 +246,14 @@
 						validators : {
 							notEmpty : {
 								message : '必须上传手持身份证视频'
+							},
+							regexp: {
+								regexp:/.*.(MPEG4|AVI)/i,
+								message: '文件类型不合法'
+							},
+							fileSieze:{
+								message : '文件不能大于20M',
+								size:20*1024
 							}						
 						}
 					},
@@ -236,13 +262,22 @@
 						validators : {
 							notEmpty : {
 								message : '必须上传手持身份证照片'
+							},
+							regexp: {
+								regexp:/.*.(MPEG4|AVI)/i,
+								message: '文件类型不合法'
+							},
+							fileSieze:{
+								message : '文件不能大于20M',
+								size:20*1024
 							}						
 						}
 					}				
 					
 				}
 			});
-			$('#uimForm').bootstrapValidator({
+			
+			$('#broadbandForm').bootstrapValidator({
 				message : 'This value is not valid',
 				feedbackIcons : {
 					valid : 'glyphicon glyphicon-ok',
@@ -274,13 +309,21 @@
 			                        message: '身份证不合法'
 			                }						
 						}
-					},					
+					},
 					cardPhotoFrontF : {
 						message : '必须上传身份证正面照片',
 						validators : {
 							notEmpty : {
 								message : '必须上传身份证正面照片'
-							}						
+							},
+							regexp: {
+								regexp:/.*.(IMG|JPG|BMP)/i,
+								message: '文件类型不合法'
+							},
+							fileSieze:{
+								message : '文件不能大于2M',
+								size:2*1024
+							}	
 						}
 					},
 					cardPhotoBackF : {
@@ -288,9 +331,17 @@
 						validators : {
 							notEmpty : {
 								message : '必须上传身份证反面照片'
+							},
+							regexp: {
+								regexp:/.*.(IMG|JPG|BMP)/i,
+								message: '文件类型不合法'
+							},
+							fileSieze:{
+								message : '文件不能大于2M',
+								size:2*1024
 							}						
 						}
-					}					
+					}	
 				}
 			});
 		});

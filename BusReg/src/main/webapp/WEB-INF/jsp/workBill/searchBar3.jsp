@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <div class="row">
-	<form class="form-inline" role="form" onSubmit="onSubmitSearch(1)">
+	<form class="form-inline" role="form" onSubmit="return onSubmitSearch(1);">
 		<div class="form-group">
 			<label for="name">用户姓名</label> <input type="text"
 				class="form-control" id="userName" value="${userName}"
@@ -20,7 +20,7 @@
 			</label>
 		</div>
 		<button type="button" class="btn btn-default"
-			onclick="onSubmitSearch(1)">查询</button>
+			onclick="return onSubmitSearch(1);">查询</button>
 	</form>
 </div>
 
@@ -31,9 +31,6 @@
 		var params="userName="+$("#userName").val()+"&cardNum="+$("#cardNum").val()+"&currentPage="+currentPage;
 		if("uim"==type)
 		{
-			$.get("uim/listDetails.do?"+params, function(data) {
-				$("#listDetails").html(data);	
-			});
 			window.location.href="uim/list.do?"+params;
 		}
 		return false;

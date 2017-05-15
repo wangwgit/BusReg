@@ -67,7 +67,8 @@ public class UimController {
 		request.setAttribute("pageResout", pageResout);
 		request.setAttribute("userName", userName);
 		request.setAttribute("cardNum", cardNum);
-		return "workBill/uimlist";
+		return "workBill/uim/list3";
+	//	return "workBill/uim/list1";
 	}
 	@RequestMapping("/details")
 	public String details(int id,HttpServletRequest request)

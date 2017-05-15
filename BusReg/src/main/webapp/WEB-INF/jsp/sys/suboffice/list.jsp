@@ -28,25 +28,39 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script src="jquery/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="bootstrapValidate/js/bootstrapValidator.min.js"></script>
+<script src="js/page.js"></script>
 </head>
 <body>
 	<div class="container">
 		<div class="page-header">
 			<div class="well">
-				<jsp:include page="../menu/businessHallMenu.jsp"></jsp:include>
-				<jsp:include page="searchBar3.jsp"></jsp:include>
+				<jsp:include page="../../menu/primaryMenu.jsp"></jsp:include>
+				<div class="row">
+					<form class="form-inline" role="form" onSubmit="return onSubmitSearch(1);">
+						<div class="form-group">
+							<label for="name">分局名</label> <input type="text"
+								class="form-control" id="name" placeholder="请输入分局名称" value="${name}">&nbsp;&nbsp;
+						</div>
+						<div class="form-group">
+							<label for="name">分局编号</label> <input type="text"
+								class="form-control" id="num" placeholder="请输入分局编号" value="${num}">&nbsp;&nbsp;
+						</div>
+						<button type="submit" class="btn btn-default"
+							onclick="return onSubmitSearch(1);">查询</button>
+						<button type="button" class="btn btn-default"
+							onclick="return add();">新增</button>
+					</form>
+				</div>
 				<div class="row" style="margin-top: 20px;">
 					<table class="table table-bordered table-hover table-striped">
 						<thead>
 							<tr>
-								<th>编号</th>
-								<th>姓名</th>
-								<th>身份证</th>
-								<th>uim号码</th>
-								<th>添加时间</th>
-								<th>所属分局</th>
-								<th>所属分点</th>
-								<th>操作</th>
+								<th>序号</th>
+								<th>分局名称</th>
+								<th>分局编号</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,14 +68,8 @@
 								varStatus="status">
 								<tr>
 									<td>${status.count}</td>
-									<td>${data.userName}</td>
-									<td>${data.cardNum}</td>
-									<td>${data.uimNum}</td>
-									<td><fmt:formatDate value="${data.insertTime}"
-											pattern="yyyy-MM-dd HH:mm:ss" /></td>
-									<td>${data.sName}</td>
-									<td>${data.bName}</td>
-									<td><a href="uim/details.do?id=${data.id}">查看详情</a></td>
+									<td>${data.name}</td>
+									<td>${data.num}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -71,20 +79,28 @@
 					<ul class="pagination pull-right" id="pageContent"></ul>
 				</div>
 			</div>
+
 		</div>
+
 	</div>
-	<script src="jquery/jquery.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="bootstrapValidate/js/bootstrapValidator.min.js"></script>
-	<script src="js/page.js"></script>
 	<script type="text/javascript">
+		function add() {
+			window.location.href = "sys/suboffice/toInput.do";
+			return fasle;
+		}
 		$(function() {
 			showPageContent("pageContent", 5, ${pageResout.totalPage},
 					${pageResout.currentPage}, ${pageResout.totalCount},
 					"onSubmitSearch");
-
 		});
+		function onSubmitSearch(currentPage) {
+			var params = "name=" + $("#name").val() + "&num=" + $("#num").val()
+					+ "&currentPage=" + currentPage;
+			window.location.href = "sys/suboffice/list.do?" + params;
+			return false;
+		}
 	</script>
+
 </body>
 </html>
 
