@@ -13,9 +13,7 @@
 
 	</resultMap>
 
-	<select id="getAll" resultMap="UserResultMap">
-		select * from user 
-	</select>
+
 
 	<select id="getCountByNameAndPassWord" resultType="java.lang.Integer">
 		select count(1) from user where userName=#{userName} and password=#{password}

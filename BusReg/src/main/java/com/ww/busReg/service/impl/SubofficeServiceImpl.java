@@ -51,5 +51,10 @@ public class SubofficeServiceImpl implements SubofficeService{
 		pageResout.setDatas(resout);
 		
 	}
+	@Override
+	public List<Suboffice> getAllUsable() {
+		
+		return subofficeDao.getAllUsable();
+	}
 
 }

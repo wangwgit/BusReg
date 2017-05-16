@@ -18,4 +18,6 @@ public interface SubofficeDao {
 	List<Suboffice> findForPage(@Param("name")String name, @Param("num")String num,
 			@Param("startIndex")int startIndex,@Param("pageSize") int pageSize);
 
+	List<Suboffice> getAllUsable();
+
 }

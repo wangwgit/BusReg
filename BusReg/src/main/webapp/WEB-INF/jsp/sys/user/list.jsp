@@ -39,16 +39,28 @@
 			<div class="well">
 				<jsp:include page="../../menu/primaryMenu.jsp"></jsp:include>
 				<div class="row">
-					<form class="form-inline" role="form" onSubmit="return onSubmitSearch(1);">
+					<form class="form-inline" role="form" id="form"
+						onSubmit="return onSubmitSearch(1);">
 						<div class="form-group">
 							<label for="name">分局名</label> <input type="text"
-								class="form-control" id="name" placeholder="请输入分局名称" value="${name}">&nbsp;&nbsp;
+								class="form-control" name="name" placeholder="请输入分局名称"
+								value="${name}">&nbsp;&nbsp;
 						</div>
 						<div class="form-group">
 							<label for="name">分局编号</label> <input type="text"
-								class="form-control" id="num" placeholder="请输入分局编号" value="${num}">&nbsp;&nbsp;
+								class="form-control" name="num" placeholder="请输入分局编号"
+								value="${num}">&nbsp;&nbsp;
 						</div>
-						<button type="submit" class="btn btn-default"
+						<div class="form-group">
+							<label for="name">所属分局</label> <select class="form-control" name="subofficeId">
+								<option value="0"  <c:if test='${subofficeId==0}'> selected = 'selected'</c:if>> 全部</option>
+								<c:forEach items="${suboffices}" var="data"
+									varStatus="status">
+									<option value="${data.id}" <c:if test='${subofficeId==data.id}'> selected = 'selected'</c:if>>${data.name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<button type="button" class="btn btn-default"
 							onclick="return onSubmitSearch(1);">查询</button>
 						<button type="button" class="btn btn-default"
 							onclick="return add();">新增</button>
@@ -59,8 +71,9 @@
 						<thead>
 							<tr>
 								<th>序号</th>
-								<th>分局名称</th>
-								<th>分局编号</th>
+								<th>分点名称</th>
+								<th>分点编号</th>
+								<th>所属分局</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -70,6 +83,7 @@
 									<td>${status.count}</td>
 									<td>${data.name}</td>
 									<td>${data.num}</td>
+									<td>${data.sName}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -85,13 +99,12 @@
 	</div>
 	<script type="text/javascript">
 		function add() {
-			window.location.href = "sys/suboffice/toInput.do";
+			window.location.href = "sys/user/toInput.do";
 			return false;
 		}
 		function onSubmitSearch(currentPage) {
-			var params = "name=" + $("#name").val() + "&num=" + $("#num").val()
-					+ "&currentPage=" + currentPage;
-			window.location.href = "sys/suboffice/list.do?" + params;
+			var params =$("#form").serialize()+ "&currentPage=" + currentPage;
+			window.location.href = "sys/user/list.do?" + params;
 			return false;
 		}
 		$(function() {

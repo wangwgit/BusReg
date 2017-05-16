@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ww.busReg.dao.BusinessHallDao">
+	<resultMap id="BusinessHallResultMap" type="com.ww.busReg.domain.BusinessHall">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="VARCHAR" />
+		<result column="usable" property="usable" javaType="boolean" jdbcType="INTEGER" />
+		<result column="subofficeId" property="subofficeId" jdbcType="INTEGER" />
+
+	</resultMap>
+
+		<select id="getCountByNum" resultType="java.lang.Integer">
+		select count(1) from businesshall where num=#{num} 
+	</select>
+	<insert id="insert" parameterType="com.ww.busReg.domain.Suboffice">
+		insert into businesshall (subofficeId,num,`name`,usable) values(#{subofficeId,jdbcType=INTEGER},#{num,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{usable,jdbcType=INTEGER})
+	</insert>
+	<select id="getFindCount" resultType="java.lang.Integer">
+		select count(1) from businesshall 
+		<where>
+			<if test="subofficeId != null">
+				and subofficeId = #{subofficeId,jdbcType=INTEGER}
+			</if>		
+			<if test="num != null and num!=''">
+				and num like #{num,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name!=''">
+				and name like #{name,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findForPageToShow" resultType="java.util.Map">
+	select h.*,s.`name` sName from(select id,subofficeId,num,`name`,usable from businesshall 
+		<where>
+			<if test="subofficeId != null">
+				and subofficeId = #{subofficeId,jdbcType=INTEGER}
+			</if>
+			<if test="num != null and num!=''">
+				and num like #{num,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name!=''">
+				and name like #{name,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by num
+		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}) h,
+		suboffice s where s.id=h.subofficeId
+	</select>
+	
+
+</mapper>

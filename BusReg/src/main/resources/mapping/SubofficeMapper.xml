@@ -44,8 +44,8 @@
 		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 	</select>
 	
-	
-	<select id="getAll" resultMap="SubofficeResultMap">
-		select * from user 
+	<!-- 获取所有可用的分局信息 -->
+	<select id="getAllUsable" resultMap="SubofficeResultMap">
+		select * from suboffice where usable=1 order by num
 	</select>
 </mapper>

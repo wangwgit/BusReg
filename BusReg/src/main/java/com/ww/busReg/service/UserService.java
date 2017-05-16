@@ -8,6 +8,6 @@ public interface UserService {
 
 	int getCountByNameAndPassWord(String userName, String pawwsord);
 
-	List<User> getAll();
+
 
 }

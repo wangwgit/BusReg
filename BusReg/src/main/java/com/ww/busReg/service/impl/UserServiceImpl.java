@@ -18,9 +18,6 @@ public class UserServiceImpl implements UserService{
 		return userDao.getCountByNameAndPassWord(userName,pawwsord);
 	
 	}
-	@Override
-	public List<User> getAll() {
-		return userDao.getAll();
-	}
+
 
 }
