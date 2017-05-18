@@ -18,10 +18,11 @@
 		<result column="businessHallId" property="businessHallId" jdbcType="INTEGER" />
 		<result column="dealState" property="dealState" jdbcType="INTEGER" />
 		<result column="insertTime" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, userName, cardNum,
-		uimNum,cardPhotoFront,cardPhotoBack,userCardVoideo,userCardPhoto,subofficeId,businessHallId,dealState
+		uimNum,cardPhotoFront,cardPhotoBack,userCardVoideo,userCardPhoto,subofficeId,businessHallId,dealState,remark
 	</sql>
 	<insert id="insert" parameterType="com.ww.busReg.domain.Uim">
 		insert into uim (
@@ -33,7 +34,7 @@
 		#{cardPhotoFront,jdbcType=VARCHAR}, #{cardPhotoBack,jdbcType=VARCHAR},
 		#{userCardVoideo,jdbcType=VARCHAR}, #{userCardPhoto,jdbcType=VARCHAR},
 		#{subofficeId,jdbcType=INTEGER},#{businessHallId,jdbcType=INTEGER},
-		#{dealState,jdbcType=INTEGER})
+		#{dealState,jdbcType=INTEGER},#{remark,jdbcType=VARCHAR})
 	</insert>
 
 	<select id="getFindCount" resultType="java.lang.Integer">
@@ -44,6 +45,12 @@
 			</if>
 			<if test="cardNum != null and cardNum!=''">
 				and cardNum like #{cardNum,jdbcType=VARCHAR}
+			</if>
+			<if test="subofficeId != null and subofficeId!=0">
+				and subofficeId = #{subofficeId,jdbcType=INTEGER}
+			</if>
+			<if test="businessHallId != null and businessHallId!=0">
+				and businessHallId = #{businessHallId,jdbcType=INTEGER}
 			</if>
 		</where>
 	</select>
@@ -58,6 +65,12 @@
 			<if test="cardNum != null and cardNum!=''">
 				and cardNum like #{cardNum,jdbcType=VARCHAR}
 			</if>
+			<if test="subofficeId != null and subofficeId!=0">
+				and subofficeId = #{subofficeId,jdbcType=INTEGER}
+			</if>
+			<if test="businessHallId != null and businessHallId!=0">
+				and businessHallId = #{businessHallId,jdbcType=INTEGER}
+			</if>
 		</where>
 		ORDER BY insertTime DESC 
 		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}) u,
@@ -67,7 +80,7 @@
 	<select id="getDetailsByIdForShow" resultType="java.util.Map">
 		SELECT u.*,s.`name` AS sName,b.`name` AS bName FROM
 		(select id,
-		userName,cardNum,uimNum,subofficeId,businessHallId,dealState,insertTime
+		userName,cardNum,uimNum,subofficeId,businessHallId,dealState,insertTime,remark
 		from uim where id= #{id,jdbcType=INTEGER}) u,
 		businesshall b,suboffice s
 		WHERE u.subofficeId=s.id AND u.businessHallId=b.id
@@ -75,71 +88,21 @@
 	<select id="getById" resultMap="UimResultMap">
 		select <include refid="Base_Column_List" />,insertTime from uim where id= #{id,jdbcType=INTEGER}
 	</select>
-	
-	
-	
-	
-	
-		
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from user_t
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-	
-	<insert id="insertSelective" parameterType="com.ww.busReg.domain.User">
-		insert into user_t
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="userName != null">
-				user_name,
-			</if>
-			<if test="password != null">
-				password,
-			</if>
-			<if test="age != null">
-				age,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="userName != null">
-				#{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				#{password,jdbcType=VARCHAR},
-			</if>
-			<if test="age != null">
-				#{age,jdbcType=INTEGER},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.ww.busReg.domain.User">
-		update user_t
-		<set>
-			<if test="userName != null">
-				user_name = #{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				password = #{password,jdbcType=VARCHAR},
-			</if>
-			<if test="age != null">
-				age = #{age,jdbcType=INTEGER},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.ww.busReg.domain.User">
-		update user_t
-		set
-		user_name = #{userName,jdbcType=VARCHAR},
-		password =
-		#{password,jdbcType=VARCHAR},
-		age = #{age,jdbcType=INTEGER}
+	<update id="updateDealStateByKey" >
+		update uim
+		set dealState=#{dealState,jdbcType=VARCHAR}	
 		where id =
 		#{id,jdbcType=INTEGER}
 	</update>
+	
+	<update id="updateRemarkByKey" >
+		update uim
+		set remark=#{remark,jdbcType=INTEGER}	
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>	
+	
+	<delete id="removeByKey" parameterType="int">
+        delete from uim where id=#{id}
+    </delete>
 </mapper>

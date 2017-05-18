@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ww.busReg.domain.Suboffice;
 import com.ww.busReg.domain.Uim;
+import com.ww.busReg.service.SubofficeService;
 import com.ww.busReg.service.UimService;
 import com.ww.busReg.util.SysConfig;
 import com.ww.busReg.util.SysUtil;
@@ -28,6 +31,8 @@ public class UimController {
 	String filePath= SysConfig.filePath()+File.separatorChar;
 	@Resource
 	UimService uimService;
+	@Resource
+	SubofficeService subofficeService;
 	@RequestMapping("/add")
 	public String addUim(Uim uim,@RequestParam MultipartFile cardPhotoFrontF,@RequestParam MultipartFile cardPhotoBackF,@RequestParam MultipartFile userCardVoideoF,@RequestParam MultipartFile userCardPhotoF,HttpServletRequest request) throws IllegalStateException, IOException
 	{	
@@ -58,25 +63,74 @@ public class UimController {
 		request.setAttribute("backUrl", "toInput.do");
 		return "util/optSuccess";
 	}
+//	@RequestMapping("/list")
+//	public String listDetails(String userName,String cardNum, Integer currentPage,HttpServletRequest request)
+//	{
+//		List<Suboffice> suboffices= subofficeService.getAllUsable();
+//		request.setAttribute("suboffices", suboffices);
+//		PageResout pageResout=new PageResout();
+//		pageResout.setCurrentPage(currentPage);
+//		uimService.findForPageForShow(userName,cardNum,pageResout);
+//		request.setAttribute("pageResout", pageResout);
+//		request.setAttribute("userName", userName);
+//		request.setAttribute("cardNum", cardNum);
+//	//	return "workBill/uim/list3";
+//		return "workBill/uim/list1";
+//	}
 	@RequestMapping("/list")
-	public String listDetails(String userName,String cardNum, Integer currentPage,HttpServletRequest request)
+	public String listDetails(String userName,String cardNum,Integer subofficeId,Integer businessHallId, Integer currentPage,HttpServletRequest request)
 	{
+		List<Suboffice> suboffices= subofficeService.getAllUsable();
+		request.setAttribute("suboffices", suboffices);
+		request.setAttribute("subofficeId", subofficeId);
+		request.setAttribute("businessHallId", businessHallId);
 		PageResout pageResout=new PageResout();
 		pageResout.setCurrentPage(currentPage);
-		uimService.findForPageForShow(userName,cardNum,pageResout);
+		uimService.findForPageForShow(userName,cardNum,subofficeId,businessHallId,pageResout);
 		request.setAttribute("pageResout", pageResout);
 		request.setAttribute("userName", userName);
 		request.setAttribute("cardNum", cardNum);
-		return "workBill/uim/list3";
-	//	return "workBill/uim/list1";
+	//	return "workBill/uim/list3";
+		return "workBill/uim/list1";
 	}
 	@RequestMapping("/details")
 	public String details(int id,HttpServletRequest request)
 	{
 		Map<String, Object> uim=  uimService.getDetailsByIdForShow(id);
 		request.setAttribute("uim", uim);
-		return "workBill/uimDetails";
+		request.setAttribute("canChangeDealState", true);
+		request.setAttribute("canDelete", true);
+		request.setAttribute("canRemark", true);
+		return "workBill/uim/details";
 	}
+	@RequestMapping("/delete")	
+	public String delete(int id,HttpServletRequest request)
+	{
+		uimService.remove(id);
+		request.setAttribute("backUrl", "uim/list.do");
+		return "util/optSuccess";
+	}
+	@RequestMapping("/changeDealState")	
+	public String changeDealState(int id,int dealState,HttpServletRequest request)
+	{
+		uimService.changeDealState(id,dealState);
+		request.setAttribute("backUrl", "uim/list.do");
+		return "util/optSuccess";
+	}
+	@RequestMapping("/toRemark")	
+	public String toRemark(int id,HttpServletRequest request)
+	{
+		Uim uim=uimService.getById(id);
+		request.setAttribute("uim", uim);
+		return "workBill/uim/remark";
+	}
+	@RequestMapping("/changeRemark")	
+	public String changeRemark(int id,String remark,HttpServletRequest request)
+	{
+		uimService.changeRemark(id,remark);
+		request.setAttribute("backUrl", "uim/list.do");
+		return "util/optSuccess";
+	}	
 	@RequestMapping("/downFile")
 	public void downFile(int id,String type,HttpServletResponse response)
 	{

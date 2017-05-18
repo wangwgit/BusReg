@@ -43,35 +43,7 @@
 </div>
 
 <script type="text/javascript">
-	function refreshBusinessHall()
-	{
-		var curId=<c:choose><c:when test="${businessHallId==null}">0</c:when><c:otherwise>${businessHallId}</c:otherwise></c:choose>;
-		var id= $("#suboffice").val();
-		$.get("sys/businessHall/getBySubofficeId.do?subofficeId="+id,function(data){		
-			var businessHall=$("#businessHall");
-			businessHall.empty();				
-			businessHall.append("<option value='0' >全部</option>");
-			if(data.success)
-			{
-				$.each( data.data, function(i, n){
-					var optStr="";
-					if(n.id==curId)
-					{
-						optStr="<option value='"+n.id+"' selected='selected'>"+n.name+"</option>";
-					}
-					else
-					{
-						optStr="<option value='"+n.id+"'>"+n.name+"</option>";
-					}
-					businessHall.append(optStr);
-				});
-			}			
-		},"json");
-	}
 
-	$(function() {
-		refreshBusinessHall();
-	});
 	function onSubmitSearch(currentPage) {
 		var type = $("input[name='type']:checked").val();
 		var params = $("#form").serialize() + "&currentPage=" + currentPage;

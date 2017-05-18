@@ -13,6 +13,7 @@
 				<th>添加时间</th>
 				<th>所属分局</th>
 				<th>所属分点</th>
+				<th>处理状态</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -26,7 +27,8 @@
 					<td><fmt:formatDate value="${data.insertTime}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td>${data.sName}</td>
-					<td>${data.bName}</td>
+					<td>${data.bName}</td>										
+					<td><c:choose><c:when test="${data.dealState}">已处理</c:when><c:otherwise>未处理</c:otherwise></c:choose></td>
 					<td><a href="uim/details.do?id=${data.id}">查看详情</a></td>
 				</tr>
 			</c:forEach>

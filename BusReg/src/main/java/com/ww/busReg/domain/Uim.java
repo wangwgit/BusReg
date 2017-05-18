@@ -17,6 +17,7 @@ public class Uim {
 	private int businessHallId;
 	private int dealState;
 	private Date insertTime;
+	private String remark;
 	public int getId() {
 		return id;
 	}
@@ -88,6 +89,12 @@ public class Uim {
 	}
 	public void setDealState(int dealState) {
 		this.dealState = dealState;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }
