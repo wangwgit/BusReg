@@ -10,7 +10,7 @@
 
 	</resultMap>
 
-		<select id="getCountByNum" resultType="java.lang.Integer">
+	<select id="getCountByNum" resultType="java.lang.Integer">
 		select count(1) from businesshall where num=#{num} 
 	</select>
 	<insert id="insert" parameterType="com.ww.busReg.domain.Suboffice">
@@ -49,5 +49,7 @@
 		suboffice s where s.id=h.subofficeId
 	</select>
 	
-
+	<select id="getBySubofficeId" resultMap="BusinessHallResultMap">
+		select * from businesshall where usable=1 and  subofficeId = #{subofficeId,jdbcType=INTEGER}
+	</select>
 </mapper>

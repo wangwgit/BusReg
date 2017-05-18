@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ww.busReg.domain.BusinessHall;
 import com.ww.busReg.domain.Suboffice;
 import com.ww.busReg.service.BusinessHallService;
 import com.ww.busReg.service.SubofficeService;
+import com.ww.busReg.vo.JsonResout;
 import com.ww.busReg.vo.PageResout;
 
 @Controller
@@ -61,5 +64,15 @@ public class BusinessHallController {
 			
 		}
 		
+	}
+	@ResponseBody 
+	@RequestMapping("/getBySubofficeId")
+	public JsonResout getBySubofficeId(int subofficeId)
+	{
+		List<BusinessHall> businessHalls= businessHallService.getBySubofficeId(subofficeId);
+		JsonResout jsonResout=new JsonResout();
+		jsonResout.setSuccess(true);
+		jsonResout.setData(businessHalls);
+		return jsonResout;
 	}
 }

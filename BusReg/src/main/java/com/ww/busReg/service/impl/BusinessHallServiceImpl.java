@@ -51,5 +51,9 @@ public class BusinessHallServiceImpl implements BusinessHallService{
 			return true;
 		}
 	}
+	@Override
+	public List<BusinessHall> getBySubofficeId(int subofficeId) {
+		return businessHallDao.getBySubofficeId(subofficeId);
+	}
 
 }

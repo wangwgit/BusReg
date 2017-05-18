@@ -6,17 +6,82 @@
 		<result column="userName" property="userName" jdbcType="VARCHAR" />
 		<result column="password" property="password" jdbcType="VARCHAR" />
 		<result column="limitsId" property="limitsId" jdbcType="INTEGER" />
-		<result column="limitsId" property="limitsId" jdbcType="INTEGER" />
 		<result column="subofficeId" property="subofficeId" jdbcType="INTEGER" />
-		<result column="businessHallId" property="businessHallId" jdbcType="INTEGER" />
-		<result column="usable" property="usable" javaType="boolean" jdbcType="INTEGER" />
+		<result column="businessHallId" property="businessHallId"
+			jdbcType="INTEGER" />
+		<result column="usable" property="usable" javaType="boolean"
+			jdbcType="INTEGER" />
 
 	</resultMap>
 
-
-
+	<select id="getFindCount" resultType="java.lang.Integer">
+		select count(1) from user
+		<where>
+			<if test="limitsId != null and limitsId!=0">
+				and limitsId = #{limitsId,jdbcType=INTEGER}
+			</if>
+			<if test="subofficeId != null and subofficeId!=0">
+				and subofficeId = #{subofficeId,jdbcType=INTEGER}
+			</if>
+			<if test="businessHallId != null and businessHallId!=0">
+				and businessHallId = #{businessHallId,jdbcType=INTEGER}
+			</if>
+			<if test="userName != null and userName!=''">
+				and userName like #{userName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="findforPageToShow" resultType="java.util.Map">
+	SELECT
+	u.*, l.`name` lName
+	FROM
+	(
+		SELECT
+			u.*, b.`name` bName
+		FROM
+			(
+				SELECT
+					u.*, s.`name` sName
+				FROM
+					(
+						SELECT
+							*
+						FROM
+							`user`
+							<where>
+								<if test="limitsId != null and limitsId!=0">
+									and limitsId = #{limitsId,jdbcType=INTEGER}
+								</if>
+								<if test="subofficeId != null and subofficeId!=0">
+									and subofficeId = #{subofficeId,jdbcType=INTEGER}
+								</if>
+								<if test="businessHallId != null and businessHallId!=0">
+									and businessHallId = #{businessHallId,jdbcType=INTEGER}
+								</if>
+								<if test="userName != null and userName!=''">
+									and userName like #{userName,jdbcType=VARCHAR}
+								</if>
+							</where>
+						LIMIT #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+					) u
+				LEFT JOIN suboffice s ON u.subofficeId = s.id
+			) u
+		LEFT JOIN businesshall b ON u.businessHallId = b.id
+	) u,
+	limits l WHERE l.id=u.limitsId
+	</select>
+	<select id="getCountByUserName" resultType="java.lang.Integer">
+		select count(1) from
+		user where userName=#{userName}
+	</select>
+	<insert id="insert" parameterType="com.ww.busReg.domain.User">
+		insert into user
+		(userName,password,limitsId,subofficeId,businessHallId,usable)
+		values(#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{limitsId,jdbcType=INTEGER},#{subofficeId,jdbcType=INTEGER},#{businessHallId,jdbcType=INTEGER},#{usable,jdbcType=INTEGER})
+	</insert>
 	<select id="getCountByNameAndPassWord" resultType="java.lang.Integer">
-		select count(1) from user where userName=#{userName} and password=#{password}
+		select
+		count(1) from user where userName=#{userName} and password=#{password}
 	</select>
 
 </mapper>

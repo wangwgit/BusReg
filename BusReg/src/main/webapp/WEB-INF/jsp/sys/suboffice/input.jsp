@@ -56,7 +56,7 @@
 							<div class="col-sm-offset-2 col-sm-10">
 								<button type="submit" class="btn btn-default">提交</button>
 								&nbsp;&nbsp;
-								<button type="reset" class="btn btn-default" id="broadbandRest">返回</button>
+								<button type="reset" class="btn btn-default" >重置</button>
 							</div>
 						</div>
 					</form>

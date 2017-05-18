@@ -22,4 +22,6 @@ public interface BusinessHallDao {
 
 	void insert(BusinessHall businessHall);
 
+	List<BusinessHall> getBySubofficeId(@Param("subofficeId")int subofficeId);
+
 }

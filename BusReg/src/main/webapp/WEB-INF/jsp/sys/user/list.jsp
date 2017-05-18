@@ -42,22 +42,32 @@
 					<form class="form-inline" role="form" id="form"
 						onSubmit="return onSubmitSearch(1);">
 						<div class="form-group">
-							<label for="name">分局名</label> <input type="text"
-								class="form-control" name="name" placeholder="请输入分局名称"
-								value="${name}">&nbsp;&nbsp;
+							<label>用户名</label> <input type="text" class="form-control"
+								name="userName" value="${userName}" placeholder="请输入用户名">&nbsp;&nbsp;
 						</div>
 						<div class="form-group">
-							<label for="name">分局编号</label> <input type="text"
-								class="form-control" name="num" placeholder="请输入分局编号"
-								value="${num}">&nbsp;&nbsp;
+							<label>请选择权限等级</label> <select
+								id="limits" class="form-control" name="limitsId">
+								<option value="0">全部</option>
+								<c:forEach items="${limitss}" var="data" varStatus="status">
+									<option value="${data.id}" <c:if test='${limitsId==data.id}'> selected = 'selected'</c:if>>${data.name}</option>
+								</c:forEach>
+							</select>
 						</div>
 						<div class="form-group">
-							<label for="name">所属分局</label> <select class="form-control" name="subofficeId">
-								<option value="0"  <c:if test='${subofficeId==0}'> selected = 'selected'</c:if>> 全部</option>
-								<c:forEach items="${suboffices}" var="data"
-									varStatus="status">
+							<label>请选择所属分局</label> <select
+								id="suboffice" class="form-control" name="subofficeId"
+								onchange="refreshBusinessHall()">
+								<option value="0">全部</option>
+								<c:forEach items="${suboffices}" var="data" varStatus="status">
 									<option value="${data.id}" <c:if test='${subofficeId==data.id}'> selected = 'selected'</c:if>>${data.name}</option>
 								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>所属分点</label> <select class="form-control"
+								name="businessHallId" id="businessHall"> 
+								<option value="0">全部</option>							
 							</select>
 						</div>
 						<button type="button" class="btn btn-default"
@@ -71,9 +81,10 @@
 						<thead>
 							<tr>
 								<th>序号</th>
-								<th>分点名称</th>
-								<th>分点编号</th>
+								<th>用户名</th>
+								<th>用户权限</th>
 								<th>所属分局</th>
+								<th>所属分点</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -81,9 +92,10 @@
 								varStatus="status">
 								<tr>
 									<td>${status.count}</td>
-									<td>${data.name}</td>
-									<td>${data.num}</td>
+									<td>${data.userName}</td>
+									<td>${data.lName}</td>
 									<td>${data.sName}</td>
+									<td>${data.bName}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -103,11 +115,38 @@
 			return false;
 		}
 		function onSubmitSearch(currentPage) {
-			var params =$("#form").serialize()+ "&currentPage=" + currentPage;
+			var params = $("#form").serialize() + "&currentPage=" + currentPage;
 			window.location.href = "sys/user/list.do?" + params;
 			return false;
 		}
+		function refreshBusinessHall()
+		{
+			var curId=<c:choose><c:when test="${businessHallId==null}">0</c:when><c:otherwise>${businessHallId}</c:otherwise></c:choose>;
+			var id= $("#suboffice").val();
+			$.get("sys/businessHall/getBySubofficeId.do?subofficeId="+id,function(data){		
+				var businessHall=$("#businessHall");
+				businessHall.empty();				
+				businessHall.append("<option value='0' >全部</option>");
+				if(data.success)
+				{
+					$.each( data.data, function(i, n){
+						var optStr="";
+						if(n.id==curId)
+						{
+							optStr="<option value='"+n.id+"' selected='selected'>"+n.name+"</option>"
+						}
+						else
+						{
+							optStr="<option value='"+n.id+"'>"+n.name+"</option>";
+						}
+						businessHall.append(optStr);
+					});
+				}			
+			},"json");
+		}
+		
 		$(function() {
+			refreshBusinessHall();
 			showPageContent("pageContent", 5, ${pageResout.totalPage},
 					${pageResout.currentPage}, ${pageResout.totalCount},
 					"onSubmitSearch");
