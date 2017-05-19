@@ -2,8 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <div class="row">
-	<form class="form-inline" role="form" id="form">
+	<form class="form-inline" role="form" id="form" onsubmit="return onSubmitSearch(1);">
 		<div class="form-group">
 			<label for="name">用户姓名</label> <input type="text"
 				class="form-control" id="userName" value="${userName}" name="userName"
@@ -32,13 +38,13 @@
 		</div>
 		<div class="form-group">
 			<label class="checkbox-inline"> <input type="radio"
-				name="type" value="uim" <c:if test='${type=="uim"}'> checked</c:if> > ${type=="uim"}单卡
+				name="type" value="uim" <c:if test='${type=="uim"}'> checked</c:if> >单卡
 			</label> <label class="checkbox-inline"> <input type="radio"
-				name="type" value="broadband" <c:if test='${type=="broadband"}'>checked</c:if>> ${type=="broadband"}宽带
+				name="type" value="broadband" <c:if test='${type=="broadband"}'>checked</c:if>> 宽带
 			</label>
 		</div>
-		<button type="submit" class="btn btn-default"
-			onclick="onSubmitSearch(1)">查询</button>
+		<button type="button" class="btn btn-default"
+			onclick="return onSubmitSearch(1);">查询</button>
 	</form>
 </div>
 
@@ -78,13 +84,11 @@
 
 		if("uim"==type)
 		{
-			alert(1);
-			window.location.href="uim/list.do?"+params;
+			window.location.href="<%=basePath%>uim/list.do?"+params;
 		}
 		if("broadband"==type)
 		{
-			alert(2);
-			window.location.href="broadband/list.do?"+params;
+			window.location.href="<%=basePath%>broadband/list.do?"+params;
 		}
 		return false;
 	}

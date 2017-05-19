@@ -62,6 +62,7 @@
 									and userName like #{userName,jdbcType=VARCHAR}
 								</if>
 							</where>
+						order by userName
 						LIMIT #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 					) u
 				LEFT JOIN suboffice s ON u.subofficeId = s.id
