@@ -16,6 +16,8 @@ public interface UserService {
 			Integer limitsId, Integer subofficeId, Integer businessHallId,
 			PageResout pageResout);
 
+	User getByUserName(String userName);
+
 
 
 }

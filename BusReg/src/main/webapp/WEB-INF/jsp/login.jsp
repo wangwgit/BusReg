@@ -76,7 +76,7 @@
 					{
 						if(result.data.loginResout)
 						{
-							window.location.href="toList.do";
+							window.location.href="uim/list.do";
 						}
 						else
 						{

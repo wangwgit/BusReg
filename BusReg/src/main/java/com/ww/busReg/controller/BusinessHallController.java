@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ww.busReg.domain.BusinessHall;
 import com.ww.busReg.domain.Suboffice;
+import com.ww.busReg.domain.User;
 import com.ww.busReg.service.BusinessHallService;
 import com.ww.busReg.service.SubofficeService;
 import com.ww.busReg.vo.JsonResout;
@@ -50,8 +52,12 @@ public class BusinessHallController {
 		return "sys/businessHall/input";
 	}
 	@RequestMapping("/add")
-	public String add(int subofficeId, String name,String num,HttpServletRequest request)
+	public String add(int subofficeId, String name,String num,HttpServletRequest request,HttpSession session)
 	{
+		if(!isHaveChangeLimits(session))
+		{
+			return "";
+		}
 		boolean resout= businessHallService.add(subofficeId,name,num);
 		if(resout)
 		{
@@ -74,5 +80,14 @@ public class BusinessHallController {
 		jsonResout.setSuccess(true);
 		jsonResout.setData(businessHalls);
 		return jsonResout;
+	}
+	private boolean isHaveChangeLimits(HttpSession session)
+	{
+		User user = (User) session.getAttribute("user");
+		if(user.getLimitsId()==1)
+		{
+			return true;
+		}
+		return false;
 	}
 }

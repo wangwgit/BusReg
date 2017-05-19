@@ -15,19 +15,13 @@
 				placeholder="请输入用户身份证号码">&nbsp;&nbsp;
 		</div>
 		<div class="form-group">
-			<label>请选择所属分局</label> <select id="suboffice" class="form-control"
-				name="subofficeId" onchange="refreshBusinessHall()">
+			<label>请选择所属分点</label> <select id="suboffice" class="form-control"
+				name="businessHallId" onchange="refreshBusinessHall()">
 				<option value="0">全部</option>
-				<c:forEach items="${suboffices}" var="data" varStatus="status">
+				<c:forEach items="${businessHalls}" var="data" varStatus="status">
 					<option value="${data.id}"
-						<c:if test='${subofficeId==data.id}'> selected = 'selected'</c:if>>${data.name}</option>
+						<c:if test='${businessHallId==data.id}'> selected = 'selected'</c:if>>${data.name}</option>
 				</c:forEach>
-			</select>
-		</div>
-		<div class="form-group">
-			<label>所属分点</label> <select class="form-control"
-				name="businessHallId" id="businessHall">
-				<option value="0">全部</option>
 			</select>
 		</div>
 		<div class="form-group">

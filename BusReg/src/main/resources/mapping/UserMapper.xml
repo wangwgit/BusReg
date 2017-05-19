@@ -74,6 +74,10 @@
 		select count(1) from
 		user where userName=#{userName}
 	</select>
+	<select id="getByName" resultMap="UserResultMap">
+		select * from
+		user where userName=#{userName}
+	</select>
 	<insert id="insert" parameterType="com.ww.busReg.domain.User">
 		insert into user
 		(userName,password,limitsId,subofficeId,businessHallId,usable)

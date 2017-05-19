@@ -45,6 +45,10 @@ public class UserServiceImpl implements UserService{
 		pageResout.setDatas(resout);
 		
 	}
+	@Override
+	public User getByUserName(String userName) {
+		return userDao.getByName(userName);
+	}
 
 
 }

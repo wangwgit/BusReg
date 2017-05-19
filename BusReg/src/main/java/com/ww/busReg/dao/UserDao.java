@@ -30,4 +30,6 @@ public interface UserDao {
 			@Param("subofficeId") Integer subofficeId,
 			@Param("businessHallId") Integer businessHallId);
 
+	public User getByName(@Param("userName") String userName);
+
 }

@@ -3,10 +3,12 @@ package com.ww.busReg.controller;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ww.busReg.domain.User;
 import com.ww.busReg.service.SubofficeService;
 import com.ww.busReg.vo.PageResout;
 
@@ -32,8 +34,12 @@ public class SubofficeConteoller {
 		return "sys/suboffice/input";
 	}
 	@RequestMapping("/add")
-	public String add(String name,String num,HttpServletRequest request)
+	public String add(String name,String num,HttpServletRequest request,HttpSession session)
 	{
+		if(!isHaveChangeLimits(session))
+		{
+			return "";
+		}
 		boolean resout= subofficeService.add(name,num);
 		if(resout)
 		{
@@ -44,7 +50,15 @@ public class SubofficeConteoller {
 		{
 			return "util/optFaile";
 			
+		}	
+	}
+	private boolean isHaveChangeLimits(HttpSession session)
+	{
+		User user = (User) session.getAttribute("user");
+		if(user.getLimitsId()==1)
+		{
+			return true;
 		}
-		
+		return false;
 	}
 }
