@@ -48,13 +48,18 @@
         <property name="maxUploadSize" value="10485760000" />  
         <!-- 内存中的最大值 -->
         <property name="maxInMemorySize" value="40960" />  
-    </bean> 
-       <!-- 拦截器 -->  
-        <mvc:interceptors>  
-            <!-- 多个拦截器，顺序执行 -->  
-            <mvc:interceptor>  
-                <mvc:mapping path="/**"/>                  
-                <bean class="com.ww.busReg.interceptor.LoginInterceptor"></bean>  
-            </mvc:interceptor> 
-        </mvc:interceptors>  
+    </bean>
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+	<!-- 测试拦截器，自动admin登录，方便测试 
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.ww.busReg.interceptor.TestInterceptor"></bean>
+		</mvc:interceptor>-->
+		<!-- 多个拦截器，顺序执行 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.ww.busReg.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>  
 </beans>

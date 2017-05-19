@@ -6,7 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-public class SysLimitsInterceptor implements HandlerInterceptor{
+import com.ww.busReg.domain.User;
+import com.ww.busReg.service.UserService;
+import com.ww.busReg.util.ApplicationUtil;
+
+public class TestInterceptor implements HandlerInterceptor{
 
 	@Override
 	public void afterCompletion(HttpServletRequest arg0,
@@ -24,10 +28,11 @@ public class SysLimitsInterceptor implements HandlerInterceptor{
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse arg1,
 			Object arg2) throws Exception {
-		String uri = request.getRequestURI();
-		System.out.println(uri);
+		UserService userService= (UserService) ApplicationUtil.getBean("userService");
+		User user= userService.getByUserName("12345");
+		request.getSession().setAttribute("user", user);
 		return true;
 	}
 

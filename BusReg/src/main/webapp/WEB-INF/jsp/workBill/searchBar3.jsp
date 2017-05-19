@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="row">
 	<form class="form-inline" role="form" onSubmit="return onSubmitSearch(1);">
 		<div class="form-group">
@@ -14,9 +16,9 @@
 		</div>
 		<div class="form-group">
 			<label class="checkbox-inline"> <input type="radio"
-				name="type" value="uim" checked> 单卡
+				name="type" value="uim" <c:if test='${type=="uim"}'> checked</c:if> > 单卡
 			</label> <label class="checkbox-inline"> <input type="radio"
-				name="type" value="broadband"> 宽带
+				name="type" value="broadband" <c:if test='${type=="broadband"}'>checked</c:if>> 宽带
 			</label>
 		</div>
 		<button type="button" class="btn btn-default"
@@ -32,6 +34,10 @@
 		if("uim"==type)
 		{
 			window.location.href="uim/list.do?"+params;
+		}
+		if("broadband"==type)
+		{
+			window.location.href="broadband/list.do?"+params;
 		}
 		return false;
 	}

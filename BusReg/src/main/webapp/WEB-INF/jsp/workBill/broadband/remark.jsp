@@ -36,14 +36,14 @@
 	<div class="container">
 		<div class="page-header">
 			<div class="well">
-				<form class="form-horizontal" role="form" action="uim/changeRemark.do" method="post">
+				<form class="form-horizontal" role="form" action="broadband/changeRemark.do" method="post">
 					<div hidden="hidden">
-						<input type="text" class="form-control" name="id"  value="${uim.id}">
+						<input type="text" class="form-control" name="id"  value="${broadband.id}">
 					</div>
 					<div class="form-group">
 							<label class="col-sm-2 control-label">备注</label>
 							<div class="col-sm-10">								
-								<textarea class="form-control" rows="3" name="remark" placeholder="请输入备注信息" >${uim.remark}</textarea>
+								<textarea class="form-control" rows="3" name="remark" placeholder="请输入备注信息" >${broadband.remark}</textarea>
 							</div>
 						</div>
 					<div class="form-group">
@@ -51,7 +51,7 @@
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-default">提交</button>
 							&nbsp;&nbsp;
-							<button type="reset" class="btn btn-default" >重置</button>
+							<button type="reset" class="btn btn-default">重置</button>
 						</div>
 					</div>
 				</form>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ww.busReg.dao.BroadbandDao">
+	<resultMap id="BroadbandResultMap" type="com.ww.busReg.domain.Broadband">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="cardNum" property="cardNum" jdbcType="VARCHAR" />
+		<result column="cardPhotoFront" property="cardPhotoFront"
+			jdbcType="VARCHAR" />
+		<result column="cardPhotoBack" property="cardPhotoBack"
+			jdbcType="VARCHAR" />
+		<result column="subofficeId" property="subofficeId" jdbcType="INTEGER" />
+		<result column="businessHallId" property="businessHallId" jdbcType="INTEGER" />
+		<result column="dealState" property="dealState" jdbcType="INTEGER" />
+		<result column="insertTime" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, userName, cardNum,
+		cardPhotoFront,cardPhotoBack,subofficeId,businessHallId,dealState,remark
+	</sql>
+	<insert id="insert" parameterType="com.ww.busReg.domain.Broadband">
+		insert into broadband (
+		<include refid="Base_Column_List" />
+		)
+		values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
+		#{cardNum,jdbcType=VARCHAR},
+		#{cardPhotoFront,jdbcType=VARCHAR}, #{cardPhotoBack,jdbcType=VARCHAR},
+		#{subofficeId,jdbcType=INTEGER},#{businessHallId,jdbcType=INTEGER},
+		#{dealState,jdbcType=INTEGER},#{remark,jdbcType=VARCHAR})
+	</insert>
+
+	<select id="getFindCount" resultType="java.lang.Integer">
+		select count(1) from broadband 
+		<where>
+			<if test="userName != null and userName!=''">
+				userName like #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="cardNum != null and cardNum!=''">
+				and cardNum like #{cardNum,jdbcType=VARCHAR}
+			</if>
+			<if test="subofficeId != null and subofficeId!=0">
+				and subofficeId = #{subofficeId,jdbcType=INTEGER}
+			</if>
+			<if test="businessHallId != null and businessHallId!=0">
+				and businessHallId = #{businessHallId,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="findForPageForShow" resultType="java.util.Map" >
+		SELECT u.*,s.`name` AS sName,b.`name` AS bName FROM
+		(select id,userName,cardNum,subofficeId,businessHallId,dealState,insertTime
+		 from broadband 
+		<where>
+			<if test="userName != null and userName!=''">
+				userName like #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="cardNum != null and cardNum!=''">
+				and cardNum like #{cardNum,jdbcType=VARCHAR}
+			</if>
+			<if test="subofficeId != null and subofficeId!=0">
+				and subofficeId = #{subofficeId,jdbcType=INTEGER}
+			</if>
+			<if test="businessHallId != null and businessHallId!=0">
+				and businessHallId = #{businessHallId,jdbcType=INTEGER}
+			</if>
+		</where>
+		ORDER BY insertTime DESC 
+		limit #{startIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}) u,
+		businesshall b,suboffice s
+		WHERE u.subofficeId=s.id AND u.businessHallId=b.id
+	</select>
+	<select id="getDetailsByIdForShow" resultType="java.util.Map">
+		SELECT u.*,s.`name` AS sName,b.`name` AS bName FROM
+		(select id,
+		userName,cardNum,subofficeId,businessHallId,dealState,insertTime,remark
+		from broadband where id= #{id,jdbcType=INTEGER}) u,
+		businesshall b,suboffice s
+		WHERE u.subofficeId=s.id AND u.businessHallId=b.id
+	</select>	
+	<select id="getById" resultMap="BroadbandResultMap">
+		select <include refid="Base_Column_List" />,insertTime from Broadband where id= #{id,jdbcType=INTEGER}
+	</select>
+	<update id="updateDealStateByKey" >
+		update broadband
+		set dealState=#{dealState,jdbcType=VARCHAR}	
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="updateRemarkByKey" >
+		update broadband
+		set remark=#{remark,jdbcType=INTEGER}	
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>	
+	
+	<delete id="removeByKey" parameterType="int">
+        delete from broadband where id=#{id}
+    </delete>
+</mapper>

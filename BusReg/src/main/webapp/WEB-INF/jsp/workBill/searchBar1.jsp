@@ -32,9 +32,9 @@
 		</div>
 		<div class="form-group">
 			<label class="checkbox-inline"> <input type="radio"
-				name="type" value="uim" checked> 单卡
+				name="type" value="uim" <c:if test='${type=="uim"}'> checked</c:if> > ${type=="uim"}单卡
 			</label> <label class="checkbox-inline"> <input type="radio"
-				name="type" value="broadband"> 宽带
+				name="type" value="broadband" <c:if test='${type=="broadband"}'>checked</c:if>> ${type=="broadband"}宽带
 			</label>
 		</div>
 		<button type="submit" class="btn btn-default"
@@ -76,11 +76,15 @@
 		var type = $("input[name='type']:checked").val();
 		var params = $("#form").serialize() + "&currentPage=" + currentPage;
 
-		if ("uim" == type) {
-			$.get("uim/listDetails.do?" + params, function(data) {
-				$("#listDetails").html(data);
-			});
-			window.location.href = "uim/list.do?" + params;
+		if("uim"==type)
+		{
+			alert(1);
+			window.location.href="uim/list.do?"+params;
+		}
+		if("broadband"==type)
+		{
+			alert(2);
+			window.location.href="broadband/list.do?"+params;
 		}
 		return false;
 	}

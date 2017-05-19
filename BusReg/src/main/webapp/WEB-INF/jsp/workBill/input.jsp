@@ -217,7 +217,7 @@
 							},
 							regexp: {
 								regexp:/.*.(IMG|JPG|BMP)/i,
-								message: '文件类型不合法'
+								message: '文件类型不合法,必须是IMG、JPG、BMP格式'
 							},
 							fileSieze:{
 								message : '文件不能大于2M',
@@ -233,7 +233,7 @@
 							},
 							regexp: {
 								regexp:/.*.(IMG|JPG|BMP)/i,
-								message: '文件类型不合法'
+								message: '文件类型不合法,必须是IMG、JPG、BMP格式'
 							},
 							fileSieze:{
 								message : '文件不能大于2M',
@@ -249,12 +249,12 @@
 							},
 							regexp: {
 								regexp:/.*.(MPEG4|AVI)/i,
-								message: '文件类型不合法'
+								message: '文件类型不合法,必须是MPEG4、AVI格式'
 							},
 							fileSieze:{
-								message : '文件不能大于20M',
-								size:20*1024
-							}						
+								message : '文件不能大于2M',
+								size:2*1024
+							}							
 						}
 					},
 					userCardPhotoF : {
@@ -264,8 +264,8 @@
 								message : '必须上传手持身份证照片'
 							},
 							regexp: {
-								regexp:/.*.(MPEG4|AVI)/i,
-								message: '文件类型不合法'
+								regexp:/.*.(IMG|JPG|BMP)/i,
+								message: '文件类型不合法,必须是IMG、JPG、BMP格式'
 							},
 							fileSieze:{
 								message : '文件不能大于20M',
@@ -321,7 +321,7 @@
 								message: '文件类型不合法'
 							},
 							fileSieze:{
-								message : '文件不能大于2M',
+								message : '文件不能大于2M,必须是IMG、JPG、BMP格式',
 								size:2*1024
 							}	
 						}
@@ -334,7 +334,7 @@
 							},
 							regexp: {
 								regexp:/.*.(IMG|JPG|BMP)/i,
-								message: '文件类型不合法'
+								message: '文件类型不合法,必须是IMG、JPG、BMP格式'
 							},
 							fileSieze:{
 								message : '文件不能大于2M',

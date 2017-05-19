@@ -12,6 +12,7 @@ public class Broadband {
 	private int businessHallId;
 	private int dealState;
 	private Date insertTime;
+	private String remark;
 	public int getId() {
 		return id;
 	}
@@ -65,6 +66,12 @@ public class Broadband {
 	}
 	public void setInsertTime(Date insertTime) {
 		this.insertTime = insertTime;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }

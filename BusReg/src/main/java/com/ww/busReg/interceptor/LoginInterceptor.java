@@ -43,8 +43,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object arg2) throws Exception {
-		String[] notFilter = new String[] { "/BusReg/toLogin.do", "/BusReg/login.do","/BusReg/errorPage.do" };
+			Object arg2) throws Exception {		
+		String[] notFilter = new String[] {"/BusReg/", "/BusReg/toLogin.do", "/BusReg/login.do","/BusReg/errorPage.do" };
 		String uri = request.getRequestURI();
 		boolean needLogin=true;
 		for(String temp:notFilter)
